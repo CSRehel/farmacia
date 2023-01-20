@@ -1,0 +1,110 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Ingresar Stock</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="/stock" method="POST">
+                <div class="mb-3">
+                    <label for="medicamento" class="form-label">Medicamento</label>
+                    <input type="text" class="form-control" id="medicamento" name="medicamento" required>
+                </div>
+                <div class="mb-3">
+                    <label for="codigo" class="form-label">Código</label>
+                    <input type="number" class="form-control" id="codigo" name="codigo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea rows="3" cols="1" class="form-control" id="descripcion" name="descripcion" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="fabricante" class="form-label">Fabricante</label>
+                    <input type="text" class="form-control" id="fabricante" name="fabricante" required>
+                </div>
+                <div class="input-group mb-3">
+                    <label for="peso" class="form-label w-100">Gramage</label>
+                    <input type="number" class="form-control" id="peso" name="peso" min="0" required>
+
+                    <span class="input-group-text">Detalle</span>
+
+                    <select class="form-select col-md-6" id="medida" name="medida" required>
+                        <option value="mg">mg</option>
+                        <option value="gr">gr</option>
+                        <option value="ml">ml</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="unidad" class="form-label">Cantidad unidad</label>
+                    <input type="number" class="form-control" id="unidad" name="unidad" min="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="caja" class="form-label">Cantidad cajas</label>
+                    <input type="number" class="form-control" id="caja" name="caja" min="1" required>
+                </div>
+
+                <div class="mb-3">
+                    {{!-- alertas --}}
+                    <div class="text-danger mt-2">{{message}}</div>
+                    {{!-- alertas --}}
+
+                    <button type="submit" class="btn btn-md btn-outline-secondary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Actualizar Stock</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="">
+                <div class="mb-3">
+                    <select class="form-select col-md-6" name="medicamento1" id="medicamento1">
+                        {{#each medicamentos}}
+                            <option value="{{this.medicamento}}">{{this.medicamento}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="caja1" class="form-label">Cantided de cajas</label>
+                    <input type="number" class="form-control" name="caja1" id="caja1" min="1" required>
+                </div>
+
+                <div class="mb-3">
+                    <div class="text-danger mt-3">{{message}}</div>
+                    <button type="button" onclick="actualizarStock()" class="btn btn-md btn-outline-secondary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<script>
+
+    const actualizarStock = async () => {
+        const medicamento = $('#medicamento1').val()
+        const caja = $('#caja1').val()
+
+        payload = { medicamento, caja }
+
+        if(caja > 0){
+            
+            try{
+                await axios.put('/stock', payload)
+                alert('Stock actualizado')
+                window.location.href = '/'
+
+            }catch({ response }){
+                const { data } = response
+                const { error } = data
+                console.log(error)
+            }
+        }else{
+            alert('La cantidad de cajas debe ser al menos 1 unidad')
+        }
+    }
+
+</script>

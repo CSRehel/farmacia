@@ -1,0 +1,109 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Prescripciones pendientes</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="actualizar()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+
+    <!--table-->
+    <div class="table-responsive">
+
+        <table class="table table-striped table-sm">
+
+            <thead>
+                <tr>
+                    <th scope="col">Cod. Prescripción</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Medicamento</th>
+                    <th scope="col">Total a entregar</th>
+                    <th scope="col">Stock disponible</th>
+                    <th scope="col">Entrega</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!--row-->
+                {{#each presc}}
+                    {{#estado this.estado}}
+                    <tr>
+                        <td>{{this.id_receta}}</td>
+                        <td>{{this.rut}}</td>
+                        <td>{{this.paciente}}</td>
+                        <td>{{this.medicamento}}</td>
+                        <td>{{this.cantidad}}</td>
+                        <td>{{this.total}}</td>
+                        <td><button type="button" class="btn btn-sm btn-outline-secondary" 
+                        onclick="validarStock(
+                            {{this.dias}},
+                            '{{this.estado}}', 
+                            {{this.id}},
+                            {{this.id_receta}},
+                            '{{this.rut}}',
+                            '{{this.correo}}',
+                            '{{this.paciente}}',
+                            '{{this.medicamento}}',
+                            {{this.cantidad}},
+                            {{this.total}}
+                        )">Ingresar</button></td>
+                    </tr>
+                    {{/estado}}
+                {{/each}}
+                <!--end row-->
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <!--end table-->
+</main>
+
+<script>
+    const validarStock = async (dias, estado, id, id_receta, rut, correo, paciente, medicamento, cantidad, total) => {
+
+        const validar = total - cantidad
+
+        if(validar > 0){
+
+            try{
+                window.location.href = `/entrega?id_prescripcion=${id}&id_receta=${id_receta}&rut=${rut}&paciente=${paciente}&medicamento=${medicamento}&cantidad=${cantidad}&dias=${dias}&estado=${estado}`
+                
+            }catch({response}){
+                const { data } = response
+                const { error } = data
+                alert( error )
+            }
+
+        }else{
+            try{
+                window.location.href = `/reserva?id_prescripcion=${id}&id_receta=${id_receta}&rut=${rut}&correo=${correo}&paciente=${paciente}&medicamento=${medicamento}&cantidad=${cantidad}&dias=${dias}&estado=${estado}`
+                
+            }catch({response}){
+                const { data } = response
+                const { error } = data
+                alert( error )
+            }
+        }
+
+    }
+
+    const actualizar = () => {
+        window.location.reload()
+    }
+</script>

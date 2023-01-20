@@ -1,0 +1,73 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Reserva Medicamento</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-3">
+                <h5>Paciente</h5>
+                <p class="rut" id="rut">{{rut}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Medicamento</h5>
+                <p class="medicamento" id="medicamento">{{medicamento}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Unidades a reservar</h5>
+                <p class="cantidad" id="cantidad">{{cantidad}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Duración tratamiento</h5>
+                <p class="dias" id="dias">{{dias}} días</p>
+            </div>
+        </div>
+
+        <!--save form-->
+        <div class="col-md-4">
+            <form action="/reserva" method="POST">
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="paciente" class="form-label">Reserva a nombre de</label>
+                        <input type="text" class="form-control" value="{{paciente}}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">correo</label>
+                        <input type="email" class="form-control" value="{{correo}}" disabled>
+                    </div>
+                    <h5>Notificación stock</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="notificacion" value="correo" id="correo" checked>
+                        <label class="form-check-label" for="correo">Correo</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="notificacion" value="no_reserva" id="no_reserva">
+                        <label class="form-check-label" for="no_reserva">No reserva</label>
+                    </div>
+                </div>
+                <div class="mt-3">
+
+                    <input type="hidden" value="{{cantidad}}" name="cantidad" id="cantidad">
+                    <input type="hidden" value="{{id_prescripcion}}" name="id_prescripcion" id="id_prescripcion">
+
+                    <div class="text-danger">{{message}}</div>
+
+                    <button type="submit" class="btn btn-md btn-outline-secondary">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <!--end save form-->
+    </div>
+</main>
+
+<script>
+    window.history.replaceState({} , '', 'reserva');
+</script>

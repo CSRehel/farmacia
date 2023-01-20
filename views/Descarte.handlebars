@@ -1,0 +1,49 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Descontar Stock</h1>
+    </div>
+
+    <div class="row">
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <form action="/descarte" method="POST">
+
+                    <div class="mb-3">
+                        <select class="form-select col-md-6" name="medicamento" id="medicamento">
+                            {{#each medicamentos}}
+                                <option value="{{this.medicamento}}">{{this.medicamento}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class=" mb-3">
+                        <label for="motivo" class="form-label w-100">Motivo descuento</label>
+                        <select class="form-select col-md-6" aria-label="" id="motivo" name="motivo" required>
+                            <option value="vencimiento">Fecha vencimiento</option>
+                            <option value="mal estado">Mal estado</option>
+                            <option value="envase roto">Envase roto</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cantidad" class="form-label">Cantidad de cajas</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="text-danger mt-3">{{message}}</div>
+                        <button type="submit" class="btn btn-md btn-outline-secondary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

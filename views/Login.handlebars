@@ -1,0 +1,31 @@
+<main class="form-signin mt-5">
+
+    <form action="/login" method="POST">
+        <img class="mb-4" src="img/logo.svg" alt="logo farmacia" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Sistema Stock Farmacia</h1>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="nombre@mail.cl" required>
+            <label for="correo">Correo</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="password" class="form-control" id="clave" name="clave" placeholder="contraseña" required>
+            <label for="clave">Contraseña</label>
+        </div>
+
+        <!--alerts validation-->
+        <div class="text-danger">
+            {{message}}
+        </div>
+        <!--alerts validation-->
+        
+        <button class="w-100 btn btn-lg btn-primary mt-5" type="submit">Entrar</button>
+        <p class="mt-5 text-muted">© 2022</p>
+    </form>
+    
+</main>
+
+<script>
+    $('.hide-sidebar').hide()
+    $('.hide-header').hide()
+</script>
