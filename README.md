@@ -4,7 +4,7 @@ El año pasado, un estudiante de Ingeniería Informática me pidió que le desar
 (solo para medicos) que estaba desarrollando su compañero en C# .NET.
 
 Este proyecto lo desarrollé con lo que recién iba aprendiendo en el bootcamp de Desarrollo de Aplicaciones Web Full Stack JavaScript (Desafío Latam), 
-por lo que la calidad de mi código no es nada ortodoxa. Este es el proyecto original, puedes ver la versión mejorada AQUI.
+por lo que la calidad de mi código no es nada ortodoxa. Este es el proyecto original, puedes ver la versión mejorada [aquí✨](https://github.com/CSRehel/farmacia_mejorada).
 
 ## 💊 Este proyecto consta de:
 
